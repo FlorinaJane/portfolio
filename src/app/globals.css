@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * Flo of Music — design tokens
+ * Dark "studio" aesthetic: near-black canvas + violet→fuchsia→cyan glow
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-background: #081726; /* deep navy */
+  --color-surface: #0f2942; /* navy (logo circle) */
+  --color-foreground: #f5f1e6; /* warm ivory */
+  --color-muted: #9fb4c9;
+  --color-subtle: #6b8199;
+  --color-border: #ffffff14;
+
+  --color-accent: #eecb3e; /* brand gold */
+  --color-accent-2: #d9a52b; /* deep gold / amber */
+  --color-accent-3: #4a7fb5; /* soft steel blue (ambient depth) */
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-manrope), sans-serif;
+  --font-mono: ui-monospace, "SF Mono", monospace;
+
+  /* animations */
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--marquee-duration, 40s)
+    linear infinite;
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-glow: glow 4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--marquee-gap, 1rem)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--marquee-gap, 1rem)));
+    }
+  }
+  @keyframes aurora {
+    0% {
+      transform: translate(-10%, -10%) rotate(0deg) scale(1);
+    }
+    50% {
+      transform: translate(10%, 10%) rotate(180deg) scale(1.2);
+    }
+    100% {
+      transform: translate(-5%, 5%) rotate(360deg) scale(1);
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes glow {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Subtle animated grain/vignette hooks */
+.bg-grid {
+  background-image: linear-gradient(
+      to right,
+      var(--color-border) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.bg-radial-fade {
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, #000 40%, transparent);
+}
+
+/* Gradient text helper */
+.text-gradient {
+  background: linear-gradient(100deg, #f6df86 0%, #eecb3e 45%, #d4a72c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glass surface */
+.glass {
+  background: color-mix(in oklab, var(--color-surface) 70%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+/* Native scrollbar hidden — replaced by the mixer fader (FaderScrollbar) */
+html {
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 55%, transparent);
+  color: #08121d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

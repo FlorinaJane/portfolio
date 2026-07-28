@@ -1,0 +1,116 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "motion/react";
+import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { contact, navLinks, profile } from "@/data";
+
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-5 sm:pt-7">
+      <motion.div
+        initial={{ y: -24, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        // 3-column grid with equal side columns -> nav links land at the true
+        // page center, logo pins to the left, CTA pins to the right end.
+        className="grid w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-2"
+      >
+        {/* Logo — left */}
+        <a
+          href="#top"
+          className="flex shrink-0 items-center justify-self-start"
+          aria-label={profile.name}
+        >
+          <Image
+            src={profile.logo}
+            alt={profile.name}
+            width={288}
+            height={288}
+            className="size-24 drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:scale-105 sm:size-28"
+            priority
+          />
+        </a>
+
+        {/* Nav links — centered with respect to the page */}
+        <nav
+          className={cn(
+            "hidden items-center gap-1 justify-self-center rounded-full px-3 py-2.5 transition-all duration-300 md:flex",
+            scrolled
+              ? "glass shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)]"
+              : "border border-transparent",
+          )}
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="rounded-full px-3.5 py-1.5 text-sm text-muted transition-colors hover:bg-white/5 hover:text-foreground"
+            >
+              {link.label}
+            </a>
+          ))}
+          {/* Get in touch — inside the navbar pill */}
+          <a
+            href={contact.cta.href}
+            className="ml-1 rounded-full bg-foreground px-3.5 py-1.5 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+          >
+            {contact.cta.label}
+          </a>
+        </nav>
+
+        {/* Mobile menu toggle — right end */}
+        <div className="col-start-3 flex items-center justify-self-end">
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+            className="grid size-10 place-items-center rounded-full border border-border text-foreground md:hidden"
+          >
+            {open ? <X className="size-4" /> : <Menu className="size-4" />}
+          </button>
+        </div>
+      </motion.div>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="glass absolute inset-x-4 top-32 rounded-2xl p-2 md:hidden"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="block rounded-xl px-4 py-3 text-sm text-muted transition-colors hover:bg-white/5 hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href={contact.cta.href}
+              onClick={() => setOpen(false)}
+              className="mt-1 block rounded-xl bg-foreground px-4 py-3 text-center text-sm font-medium text-background"
+            >
+              {contact.cta.label}
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
