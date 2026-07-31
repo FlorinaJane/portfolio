@@ -22,7 +22,7 @@ export function Contact() {
                 {r.emoji}
               </span>
               <div className="flex flex-col">
-                <span className="flex items-center gap-1 font-display text-lg font-semibold">
+                <span className="flex items-center gap-1 text-lg font-semibold">
                   {r.title}
                   <ArrowUpRight className="size-4 text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground" />
                 </span>
@@ -37,7 +37,7 @@ export function Contact() {
       <Reveal>
         <div className="relative overflow-hidden rounded-3xl border border-border px-6 py-20 text-center sm:px-12">
           <AuroraBackground />
-          <h2 className="mx-auto max-w-2xl font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+          <h2 className="mx-auto max-w-2xl font-display text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
             {contact.heading}
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">

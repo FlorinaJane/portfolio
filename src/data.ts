@@ -18,16 +18,23 @@ export const profile = {
   name: "Flo of Music",
   realName: "Florina Jane",
   role: "Mixing & Mastering Engineer · Music Educator",
+  // The hero states these two on their own lines: [0] is the headline, [1] the
+  // secondary credit beneath it. `role` above stays as the joined form used in
+  // the page <title> and social previews.
+  roles: ["Mixing & Mastering Engineer", "Music Educator"],
   tagline:
     "Mixing & mastering engineer helping artists bring their songs to life — clarity, emotion, and balance, release ready.",
   about:
     "I’m Florina Jane, also known as Flo of Music, a mixing and mastering engineer and music educator passionate about helping artists bring their songs to life. I specialize in mixing and mastering, with a strong focus on clarity, emotion, and balance. I work across pop, indie, acoustic, contemporary genres, and more, adapting my approach to suit each artist’s sound. My creative approach blends technical precision with musical intuition, so every track feels true to the artist while being fully release ready.",
   genres: ["Pop", "Indie", "Acoustic", "Contemporary", "& more"],
   // Optional portrait — drop an image in /public and set the path here.
-  portrait: "" as string,
+  portrait: "/portrait.jpeg" as string,
   // Brand logo shown in the navbar. Replace with your exact artwork by saving
   // it to /public (e.g. "/logo.png") and updating this path.
   logo: "/logo.png",
+  // Full-bleed hero backdrop. Wants a dark, low-contrast image: the hero text
+  // sits directly on it, softened only by a navy wash and centre vignette.
+  heroBg: "/hero-bg.jpg",
 };
 
 /* ----------------------------- Socials ---------------------------------- */

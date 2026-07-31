@@ -172,11 +172,11 @@ export function FaderScrollbar() {
           })}
         </div>
 
-        {/* slot / groove with a progress fill from the top */}
-        <div className="pointer-events-none absolute inset-y-2 left-1/2 w-[6px] -translate-x-1/2 overflow-hidden rounded-full bg-black/60 shadow-[inset_0_0_6px_rgba(0,0,0,0.8)] ring-1 ring-white/10">
+        {/* slot / groove — blue above the fader, gold below it */}
+        <div className="pointer-events-none absolute inset-y-2 left-1/2 w-[8px] -translate-x-1/2 overflow-hidden rounded-full bg-accent-3/70 shadow-[inset_0_0_6px_rgba(0,0,0,0.5)] ring-1 ring-white/10">
           <div
-            className="absolute inset-x-0 top-0 rounded-full bg-gradient-to-b from-accent/10 to-accent/70"
-            style={{ height: `${capY + CAP / 2}px` }}
+            className="absolute inset-x-0 bottom-0 bg-accent"
+            style={{ top: `${capY + CAP / 2}px` }}
           />
         </div>
 

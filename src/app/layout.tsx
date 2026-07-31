@@ -1,21 +1,10 @@
 import type { Metadata } from "next";
-import { Sora, Manrope } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data";
+import { ScrollTopOnLoad } from "@/components/ui/scroll-top-on-load";
 
-// Display sans — clean, modern, geometric (headings)
-const sora = Sora({
-  variable: "--font-sora",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
-
-// Modern sans — clean & professional (body/UI)
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
+// No webfonts: typography comes from the OS system stack (see globals.css).
+// Apple devices render SF Pro; other platforms fall back to Segoe UI / Roboto.
 
 export const metadata: Metadata = {
   title: `${profile.name} — ${profile.role}`,
@@ -42,11 +31,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${manrope.variable} ${sora.variable} h-full antialiased`}
-    >
-      <body className="min-h-full">{children}</body>
+    <html lang="en" className="h-full antialiased">
+      <body className="min-h-full">
+        <ScrollTopOnLoad />
+        {children}
+      </body>
     </html>
   );
 }

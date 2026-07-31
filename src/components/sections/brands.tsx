@@ -6,7 +6,7 @@ export function Brands() {
   return (
     <section className="relative py-16">
       <Reveal className="mx-auto mb-8 max-w-6xl px-5 text-center sm:px-8">
-        <p className="text-sm font-medium uppercase tracking-[0.2em] text-subtle">
+        <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-subtle">
           Brands &amp; studios I’ve worked with
         </p>
       </Reveal>
@@ -28,7 +28,7 @@ export function Brands() {
               <span className="grid size-8 place-items-center rounded-lg bg-[linear-gradient(120deg,#f6df86,var(--color-accent-2))] text-sm font-bold text-[#08121d]">
                 {brand.name.charAt(0)}
               </span>
-              <span className="whitespace-nowrap font-display text-lg font-medium text-muted transition-colors group-hover:text-foreground">
+              <span className="whitespace-nowrap text-lg font-medium text-muted transition-colors group-hover:text-foreground">
                 {brand.name}
               </span>
             </a>

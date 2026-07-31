@@ -42,7 +42,7 @@ export function Mixes() {
                 </div>
               </div>
               <div className="flex flex-col gap-1 p-5">
-                <h3 className="font-display text-lg font-semibold leading-snug">
+                <h3 className="text-lg font-semibold leading-snug">
                   {mix.title}
                 </h3>
                 {mix.artist && (

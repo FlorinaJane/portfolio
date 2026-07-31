@@ -16,9 +16,15 @@
   --color-accent-2: #d9a52b; /* deep gold / amber */
   --color-accent-3: #4a7fb5; /* soft steel blue (ambient depth) */
 
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-sora), var(--font-manrope), sans-serif;
-  --font-mono: ui-monospace, "SF Mono", monospace;
+  /* Apple system stack — SF Pro on macOS/iOS, graceful fallbacks elsewhere.
+     `-apple-system`/`BlinkMacSystemFont` pick up the locally installed SF Pro;
+     the OS swaps in the Display optical size automatically at large sizes. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro",
+    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro",
+    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    monospace;
 
   /* animations */
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;

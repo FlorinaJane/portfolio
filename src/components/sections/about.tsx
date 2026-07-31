@@ -47,8 +47,10 @@ export function About() {
           </div>
           {/* floating badge */}
           <div className="glass absolute -bottom-4 -left-4 hidden rounded-2xl px-4 py-3 sm:block animate-float">
-            <p className="font-display text-lg font-semibold">Release ready</p>
-            <p className="text-xs text-muted">technical precision · musical intuition</p>
+            <p className="text-lg font-semibold">Release ready</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+              technical precision · musical intuition
+            </p>
           </div>
         </Reveal>
       </div>
@@ -64,7 +66,9 @@ export function About() {
             <span className="font-display text-4xl font-bold text-gradient sm:text-5xl">
               <Counter value={s.value} suffix={s.suffix} />
             </span>
-            <span className="text-sm text-muted">{s.label}</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+              {s.label}
+            </span>
           </Reveal>
         ))}
       </div>

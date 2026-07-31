@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { contact, navLinks, profile } from "@/data";
+import { contact, navLinks } from "@/data";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,29 +24,16 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         // 3-column grid with equal side columns -> nav links land at the true
-        // page center, logo pins to the left, CTA pins to the right end.
+        // page center and the CTA pins to the right end. The left column is
+        // now an empty spacer; it still has to be 1fr to balance the right.
         className="grid w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-2"
       >
-        {/* Logo — left */}
-        <a
-          href="#top"
-          className="flex shrink-0 items-center justify-self-start"
-          aria-label={profile.name}
-        >
-          <Image
-            src={profile.logo}
-            alt={profile.name}
-            width={288}
-            height={288}
-            className="size-24 drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:scale-105 sm:size-28"
-            priority
-          />
-        </a>
-
-        {/* Nav links — centered with respect to the page */}
+        {/* Nav links — centered with respect to the page. `col-start-2` is
+            load-bearing now the left column is empty: without it these
+            auto-place into column 1 and the pill drifts off centre. */}
         <nav
           className={cn(
-            "hidden items-center gap-1 justify-self-center rounded-full px-3 py-2.5 transition-all duration-300 md:flex",
+            "col-start-2 hidden items-center gap-1 justify-self-center rounded-full px-3 py-2.5 transition-all duration-300 md:flex",
             scrolled
               ? "glass shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)]"
               : "border border-transparent",
@@ -62,17 +48,18 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
-          {/* Get in touch — inside the navbar pill */}
+        </nav>
+
+        {/* Right column — CTA on desktop, menu toggle on mobile. Previously the
+            CTA sat inside the centre pill, leaving this column empty on
+            desktop and the whole bar visually lopsided. */}
+        <div className="col-start-3 flex items-center gap-2 justify-self-end">
           <a
             href={contact.cta.href}
-            className="ml-1 rounded-full bg-foreground px-3.5 py-1.5 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+            className="hidden rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-0.5 md:block"
           >
             {contact.cta.label}
           </a>
-        </nav>
-
-        {/* Mobile menu toggle — right end */}
-        <div className="col-start-3 flex items-center justify-self-end">
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
@@ -89,7 +76,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="glass absolute inset-x-4 top-32 rounded-2xl p-2 md:hidden"
+            className="glass absolute inset-x-4 top-20 rounded-2xl p-2 sm:top-24 md:hidden"
           >
             {navLinks.map((link) => (
               <a
