@@ -257,16 +257,24 @@ export function ScrollingWaveform({
     if (!canvas || !ctx) return;
 
     const step = barWidth + barGap;
-    // Enough bars to cover the canvas plus the one scrolling in off-screen
-    const total = Math.max(
-      barCount,
-      Math.ceil(sizeRef.current.width / step) + 2,
-    );
-    if (valuesRef.current.length !== total) {
-      valuesRef.current = Array.from({ length: total }, nextValue);
-    }
 
-    const paint = () =>
+    // Enough bars to cover the canvas plus the one scrolling in off-screen.
+    // Topped up before every paint rather than sized once here: the canvas
+    // width lives in a ref, so a resize never re-runs this effect. Sizing the
+    // array from a stale width leaves the bar field short of the right edge —
+    // which, in a centred canvas, reads as the waveform being off-centre.
+    const topUp = () => {
+      const needed = Math.max(
+        barCount,
+        Math.ceil(sizeRef.current.width / step) + 2,
+      );
+      while (valuesRef.current.length < needed) {
+        valuesRef.current.push(nextValue());
+      }
+    };
+
+    const paint = () => {
+      topUp();
       drawBars(ctx, valuesRef.current, {
         width: sizeRef.current.width,
         height: sizeRef.current.height,
@@ -277,6 +285,7 @@ export function ScrollingWaveform({
         fill: barFill(ctx, canvas, sizeRef.current.height, barColor),
         offset: offsetRef.current,
       });
+    };
 
     // Honour the same reduced-motion contract as the rest of the site
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");

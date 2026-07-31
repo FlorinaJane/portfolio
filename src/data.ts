@@ -22,8 +22,18 @@ export const profile = {
   // secondary credit beneath it. `role` above stays as the joined form used in
   // the page <title> and social previews.
   roles: ["Mixing & Mastering Engineer", "Music Educator"],
+  // Kept deliberately plain and keyword-bearing: this is the <meta
+  // description> and OG description in layout.tsx, where it is read by search
+  // engines rather than people. The hero uses `heroLine` instead.
   tagline:
     "Mixing & mastering engineer helping artists bring their songs to life — clarity, emotion, and balance, release ready.",
+  // The spoken-aloud version, for the hero. First person to match `about`.
+  // `heroIntro` is the greeting the flipping role completes ("…and I’m a" +
+  // "Music Educator"), and the role sits on its own line: the two roles differ
+  // by 13 characters, so inlining them mid-sentence would re-wrap the line and
+  // jog everything below on every flip.
+  heroIntro: "Hey, I’m Florina Jane and I’m a",
+  heroLine: "You know the feeling. I know the frequencies.",
   about:
     "I’m Florina Jane, also known as Flo of Music, a mixing and mastering engineer and music educator passionate about helping artists bring their songs to life. I specialize in mixing and mastering, with a strong focus on clarity, emotion, and balance. I work across pop, indie, acoustic, contemporary genres, and more, adapting my approach to suit each artist’s sound. My creative approach blends technical precision with musical intuition, so every track feels true to the artist while being fully release ready.",
   genres: ["Pop", "Indie", "Acoustic", "Contemporary", "& more"],

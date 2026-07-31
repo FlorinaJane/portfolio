@@ -1,11 +1,12 @@
 "use client";
 
-import { Fragment } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { ArrowUpRight, Headphones } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { ScrollingWaveform } from "@/components/ui/waveform";
+import { VinylRecord } from "@/components/ui/vinyl-record";
+import { FlipWords } from "@/components/ui/flip-words";
 import { profile, socials } from "@/data";
 
 const container: Variants = {
@@ -26,7 +27,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 pb-16 pt-28 text-center sm:px-8 sm:pb-20 sm:pt-32"
+      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 pb-12 pt-28 text-center sm:px-8 sm:pb-16 sm:pt-32"
     >
       <div aria-hidden className="absolute inset-0 overflow-hidden">
         <Image
@@ -47,50 +48,58 @@ export function Hero() {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="relative z-10 flex max-w-3xl flex-col items-center gap-[clamp(1.5rem,4vh,2.5rem)]"
+        className="relative z-10 flex max-w-4xl flex-col items-center gap-[clamp(1.5rem,3vh,2.5rem)]"
       >
         <motion.div
           variants={item}
-          className="relative mb-[clamp(0.25rem,1vh,0.75rem)] flex items-center justify-center"
+          className="relative mb-[clamp(0.25rem,1vh,0.75rem)] w-[min(17rem,30vh)] sm:w-[min(20rem,32vh)] md:w-[min(23rem,34vh)]"
         >
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 scale-150 rounded-full bg-[radial-gradient(circle_at_center,var(--color-background)_30%,transparent_70%)]"
           />
-          <div className="relative size-[min(15rem,28vh)] overflow-hidden rounded-full shadow-[0_24px_70px_-12px_rgba(0,0,0,0.9)] sm:size-[min(18rem,30vh)] md:size-[min(21rem,32vh)]">
-            <Image
-              src={profile.logo}
-              alt={profile.name}
-              fill
-              sizes="(max-width: 640px) 240px, (max-width: 768px) 288px, 336px"
-              priority
-              className="scale-[1.208] object-cover contrast-105 saturate-110"
-            />
-          </div>
+          <VinylRecord
+            label={profile.logo}
+            labelAlt={profile.name}
+            priority
+            sizes="(max-width: 640px) 224px, (max-width: 768px) 272px, 320px"
+          />
         </motion.div>
 
-        <motion.h1
-          variants={item}
-          className="flex flex-col items-center gap-6 font-display text-2xl font-semibold leading-[1.1] sm:flex-row sm:gap-10 sm:text-3xl md:gap-2 md:text-4xl"
-        >
-          <span className="sr-only">{profile.name} — </span>
-          {profile.roles.map((role, i) => (
-            <Fragment key={role}>
-              {i > 0 && (
-                <span
-                  aria-hidden
-                  className="h-px w-20 bg-accent/50 sm:h-auto sm:w-px sm:self-stretch"
-                />
-              )}
-              <span className="max-w-[10ch] text-balance text-center">
-                {role}
-              </span>
-            </Fragment>
-          ))}
-        </motion.h1>
+        {/* The rotation shows one role at a time, so the heading carries both
+            for assistive tech and crawlers while the animation is decorative. */}
+        <motion.div variants={item} className="flex flex-col items-center">
+          <h1 className="sr-only">
+            {profile.name} — {profile.role}
+          </h1>
+          {/* `relative` keeps FlipWords' absolutely-positioned exiting word
+              anchored here rather than against the hero wrapper.
+
+              The two arbitrary sizes are deliberate. The intro is 31 characters
+              against the role's 27, so the intro decides where the line breaks,
+              and a break changes this block's height. text-4xl/text-5xl land
+              within a few px of wrapping at those widths; 2rem and 2.5rem clear
+              it with ~10% to spare. */}
+          <div
+            aria-hidden
+            className="relative font-display text-2xl font-bold leading-[1.1] tracking-tight sm:text-[2rem] md:text-[2.5rem] lg:text-5xl"
+          >
+            <span className="block">{profile.heroIntro}</span>
+            <FlipWords
+              words={profile.roles}
+              duration={3200}
+              className="px-0 text-accent"
+            />
+          </div>
+          {/* One unit with the role above it, so `mt-3` rather than another
+              container gap in an already-tight hero. */}
+          <p className="mt-3 max-w-2xl text-balance text-base text-muted sm:text-lg">
+            {profile.heroLine}
+          </p>
+        </motion.div>
         <motion.div variants={item} className="w-full max-w-lg px-2">
           <ScrollingWaveform
-            height={64}
+            height={32}
             speed={44}
             barWidth={4}
             barGap={3}
