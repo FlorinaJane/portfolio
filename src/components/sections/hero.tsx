@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "motion/react";
-import { ArrowUpRight, Headphones } from "lucide-react";
+import { Play, SlidersVertical } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { ScrollingWaveform } from "@/components/ui/waveform";
 import { VinylRecord } from "@/components/ui/vinyl-record";
 import { FlipWords } from "@/components/ui/flip-words";
-import { profile, socials } from "@/data";
+import { SocialLinks } from "@/components/ui/social-links";
+import { profile } from "@/data";
 
 const container: Variants = {
   hidden: {},
@@ -108,35 +109,39 @@ export function Hero() {
           />
         </motion.div>
 
+        {/* Full-width stacked buttons below `sm` so neither CTA looks like the
+            secondary one on a phone; a row of equal-height pills above it. */}
         <motion.div
           variants={item}
-          className="flex flex-col items-center gap-4 sm:flex-row sm:gap-5"
+          className="flex w-full max-w-xs flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center sm:gap-4"
         >
-          <ButtonLink href="#mixes" variant="primary">
-            <Headphones className="size-4" />
+          <ButtonLink
+            href="#mixes"
+            variant="primary"
+            size="lg"
+            className="w-full sm:w-auto"
+          >
+            {/* Filled triangle rather than an outline: the solid play mark is
+                the universal "listen" cue and holds up at 16px. */}
+            <Play className="fill-current" />
             Hear my mixes
           </ButtonLink>
-          <ButtonLink href="#services" variant="outline">
+          <ButtonLink
+            href="#services"
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto"
+          >
+            {/* Console faders — the services are mixing/mastering work, and it
+                pairs with the fader scrollbar. Deliberately not an arrow: this
+                is a same-page anchor, not an outbound link. */}
+            <SlidersVertical className="motion-safe:transition-transform motion-safe:group-hover:scale-110" />
             View services
-            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </ButtonLink>
         </motion.div>
 
-        <motion.div
-          variants={item}
-          className="mt-1 flex items-center gap-6 text-sm text-subtle"
-        >
-          {socials.map((s) => (
-            <a
-              key={s.key}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-foreground"
-            >
-              {s.label}
-            </a>
-          ))}
+        <motion.div variants={item}>
+          <SocialLinks />
         </motion.div>
       </motion.div>
     </section>

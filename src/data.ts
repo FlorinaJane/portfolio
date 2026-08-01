@@ -39,9 +39,14 @@ export const profile = {
   genres: ["Pop", "Indie", "Acoustic", "Contemporary", "& more"],
   // Optional portrait — drop an image in /public and set the path here.
   portrait: "/portrait.jpeg" as string,
-  // Brand logo shown in the navbar. Replace with your exact artwork by saving
-  // it to /public (e.g. "/logo.png") and updating this path.
+  // Circular navy+gold badge — used as the vinyl record's centre label in the
+  // hero. Replace with your exact artwork by saving it to /public and updating
+  // this path.
   logo: "/logo.png",
+  // Monochrome white mark on a transparent background, used in the navbar.
+  // Unlike `logo` this is a full-bleed mark, not a circular badge, so it is
+  // rendered without a ring or rounded crop.
+  logoWhite: "/logo-white.webp",
   // Full-bleed hero backdrop. Wants a dark, low-contrast image: the hero text
   // sits directly on it, softened only by a navy wash and centre vignette.
   heroBg: "/hero-bg.jpg",
@@ -51,7 +56,17 @@ export const profile = {
 
 export type SocialKey = "instagram" | "youtube" | "gumroad" | "email";
 
+/**
+ * Array order is the display order of the social icons in the hero.
+ * Each `key` picks the icon in `components/ui/social-links.tsx`, and `label`
+ * is both the hover tooltip and the link's accessible name.
+ */
 export const socials: { key: SocialKey; label: string; href: string }[] = [
+  {
+    key: "youtube",
+    label: "YouTube",
+    href: "https://www.youtube.com/@floofmusic",
+  },
   {
     key: "instagram",
     label: "Instagram",
@@ -61,6 +76,12 @@ export const socials: { key: SocialKey; label: string; href: string }[] = [
     key: "gumroad",
     label: "Gumroad",
     href: "https://floofmusic.gumroad.com/",
+  },
+  {
+    // Keep this address in sync with `contact.email` below.
+    key: "email",
+    label: "Email",
+    href: "mailto:flojane.music@gmail.com",
   },
 ];
 
