@@ -22,8 +22,8 @@ export function Brands() {
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
         {/* A short centred rule rather than a full-width one: enough to mark the
             join with the About block, without drawing a line across the page.
-            It sits deliberately closer to the stats above than to the title
-            below — spaced evenly it reads as the title's underline. */}
+            The space below it is kept equal to About's bottom padding, so the
+            rule sits centred in the gap between the two sections. */}
         <Reveal className="flex justify-center">
           <span
             aria-hidden
@@ -31,7 +31,7 @@ export function Brands() {
           />
         </Reveal>
 
-        <Reveal delay={0.05} className="mt-20 text-center sm:mt-24">
+        <Reveal delay={0.05} className="mt-14 text-center sm:mt-16">
           <p className="font-label text-sm font-medium uppercase tracking-[0.18em] text-muted sm:text-base">
             {brandsHeading}
           </p>

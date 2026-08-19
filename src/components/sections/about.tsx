@@ -7,7 +7,7 @@ import { profile } from "@/data";
 
 export function About() {
   return (
-    <Section id="about" className="pt-2 pb-4 sm:pt-4 sm:pb-4">
+    <Section id="about" className="pt-2 pb-14 sm:pt-4 sm:pb-16">
       {/* Ambient pool behind the whole block, so the columns sit *in* the page
           rather than on top of a flat navy field. */}
       <div
