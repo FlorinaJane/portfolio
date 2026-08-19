@@ -219,16 +219,74 @@ export const testimonials = {
 
 /* --------------------------- Brands / clients --------------------------- */
 
-export type Brand = { name: string; href: string };
+export const brandsHeading = "Brands & studios I’ve worked with";
+
+/**
+ * `logo` files live in `public/brands/`, pulled from each company's own site
+ * and trimmed to the mark. They are rendered as white silhouettes, so only the
+ * alpha channel matters — `width`/`height` are the real pixel dimensions and
+ * exist to give `next/image` the aspect ratio.
+ *
+ * `scale` is optical, not geometric: a long wordmark like Takstar reads far
+ * heavier than a compact mark like KR Records at the same height, so each logo
+ * gets a multiplier that evens out how large it *looks* on the wall.
+ */
+export type Brand = {
+  name: string;
+  href: string;
+  logo: string;
+  width: number;
+  height: number;
+  scale?: number;
+};
 
 export const brands: Brand[] = [
-  { name: "Audimee", href: "https://audimee.com/" },
-  { name: "KR Records", href: "https://krrecords.in/" },
-  { name: "Freebeat AI", href: "https://freebeat.ai/" },
-  { name: "TopMediai", href: "https://www.topmediai.com/" },
-  { name: "AAFT Online", href: "https://aaftonline.com/" },
-  { name: "Pitch Innovations", href: "https://pitchinnovations.com/" },
-  { name: "Takstar", href: "https://takstar.com/" },
+  {
+    name: "Audimee",
+    href: "https://audimee.com/",
+    logo: "/brands/audimee.webp",
+    width: 606,
+    height: 160,
+  },
+  {
+    name: "Freebeat AI",
+    href: "https://freebeat.ai/",
+    logo: "/brands/freebeat-ai.webp",
+    width: 1083,
+    height: 160,
+    scale: 0.9,
+  },
+  {
+    name: "TopMediai",
+    href: "https://www.topmediai.com/",
+    logo: "/brands/topmediai.webp",
+    width: 785,
+    height: 160,
+  },
+  {
+    name: "AAFT Online",
+    href: "https://aaftonline.com/",
+    logo: "/brands/aaft-online.webp",
+    width: 354,
+    height: 160,
+    scale: 1.1,
+  },
+  {
+    name: "Pitch Innovations",
+    href: "https://pitchinnovations.com/",
+    logo: "/brands/pitch-innovations.webp",
+    width: 496,
+    height: 160,
+    scale: 1.05,
+  },
+  {
+    name: "Takstar",
+    href: "https://takstar.com/",
+    logo: "/brands/takstar.webp",
+    width: 1391,
+    height: 160,
+    scale: 1.2,
+  },
 ];
 
 /* --------------------------- Resources / links -------------------------- */

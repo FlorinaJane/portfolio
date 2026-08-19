@@ -7,7 +7,7 @@ import { stats } from "@/data";
 
 export function StatsStrip() {
   return (
-    <div className="relative mt-20 sm:mt-24">
+    <div className="relative mt-10 sm:mt-12">
       {/* Ambient gold bloom — the hero's radial glow scaled down to a strip, so
           the row reads as lit rather than boxed. */}
       <div
@@ -18,15 +18,9 @@ export function StatsStrip() {
       <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
         {stats.map((s, i) => (
           <Reveal key={s.label} delay={i * 0.08} className="h-full">
-            {/* No padding on the card itself: the hairline below has to reach
-                its top edge, so the padding lives on the content instead. */}
+            {/* Padding lives on the content, so the glow below can bleed to
+                the card's own edges. */}
             <SpotlightCard className="grid h-full cursor-default bg-surface/40 motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:-translate-y-1">
-              {/* Edge-lit top rule — the same fade-to-transparent trick the hero
-                  uses, so the tile is lit rather than framed. */}
-              <span
-                aria-hidden
-                className="absolute inset-x-4 top-0 h-px bg-linear-to-r from-transparent via-accent/70 to-transparent"
-              />
               {/* Soft glow under the figure, echoing the hero's radial pools. */}
               <span
                 aria-hidden
@@ -39,7 +33,7 @@ export function StatsStrip() {
                 <span className="text-gradient font-display text-[2.5rem] font-bold leading-none tracking-tight sm:text-5xl md:text-6xl">
                   <Counter value={s.value} suffix={s.suffix} />
                 </span>
-                <span className="mt-3 font-label text-[11px] font-medium uppercase tracking-[0.14em] text-muted sm:text-xs">
+                <span className="mt-3 font-label text-xs font-medium uppercase tracking-[0.14em] text-muted sm:text-sm">
                   {s.label}
                 </span>
               </div>

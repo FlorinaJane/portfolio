@@ -7,33 +7,53 @@ import { profile } from "@/data";
 
 export function About() {
   return (
-    <Section id="about" className="pt-8">
-      <div className="grid items-start gap-12 lg:grid-cols-[1.1fr_1fr]">
+    <Section id="about" className="pt-2 pb-4 sm:pt-4 sm:pb-4">
+      {/* Ambient pool behind the whole block, so the columns sit *in* the page
+          rather than on top of a flat navy field. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[38rem] w-[min(70rem,120%)] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--color-accent-3)_18%,transparent),transparent_70%)] opacity-70 blur-3xl"
+      />
+
+      <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
         {/* Text */}
         <Reveal className="flex flex-col gap-6">
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
             About <span className="text-gradient">Me</span>
           </h2>
-          <p className="max-w-[54ch] text-base leading-relaxed text-foreground/75 sm:text-lg">
+          {/* The rule gives the copy a left edge to sit against — without it the
+              paragraph floats in the middle of the column. */}
+          <p className="max-w-[54ch] border-l border-accent/25 pl-5 text-base leading-relaxed text-foreground/75 sm:pl-6 sm:text-lg">
             {profile.about}
           </p>
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-surface">
-            <AuroraBackground variant="aurora" grid={false} fade={false} />
-            {profile.portrait ? (
-              <Image
-                src={profile.portrait}
-                alt={profile.realName}
-                fill
-                sizes="400px"
-                className="object-cover object-[63%_50%] scale-115"
-              />
-            ) : (
-              <PortraitPlaceholder />
-            )}
-            <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
+          {/* A gold beam tracing the frame: a conic gradient rotating inside a
+              1px inset, so only the sliver at the very edge is ever visible.
+              `bg-border` on the wrapper keeps a hairline all the way round, so
+              the edge never looks unfinished where the beam isn't. */}
+          <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-3xl bg-border p-px">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[150%] -translate-x-1/2 -translate-y-1/2 bg-[conic-gradient(from_0deg,transparent_0deg,transparent_240deg,color-mix(in_oklab,var(--color-accent)_85%,transparent)_320deg,transparent_360deg)] motion-safe:animate-[spin_7s_linear_infinite]"
+            />
+
+            <div className="relative aspect-square w-full overflow-hidden rounded-3xl bg-surface">
+              <AuroraBackground variant="aurora" grid={false} fade={false} />
+              {profile.portrait ? (
+                <Image
+                  src={profile.portrait}
+                  alt={profile.realName}
+                  fill
+                  sizes="400px"
+                  className="scale-115 object-cover object-[63%_50%]"
+                />
+              ) : (
+                <PortraitPlaceholder />
+              )}
+              <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
+            </div>
           </div>
         </Reveal>
       </div>
