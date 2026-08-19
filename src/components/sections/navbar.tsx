@@ -132,7 +132,13 @@ export function Navbar() {
             : { type: "spring", stiffness: 200, damping: 40 }
         }
         className={cn(
-          "relative grid w-full grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-full border pl-2.5 pr-2",
+          // `justify-between` rather than a 1fr_auto_1fr grid: the grid centred
+          // the links in the *bar*, so the two gaps around them only matched
+          // when the brand and the CTA happened to be the same width. They
+          // aren't — the wordmark is wider — so the left gap always came out
+          // short. Distributing the free space instead makes both gaps equal
+          // by construction, at any bar width.
+          "relative flex w-full items-center justify-between gap-3 rounded-full border pl-2.5 pr-2",
           // Fixed height rather than padding: every item then sits on one
           // baseline grid, which is most of what separates a tidy bar from a
           // lumpy one.
@@ -159,7 +165,7 @@ export function Navbar() {
         <a
           href="#top"
           aria-label={`${profile.name} — back to top`}
-          className="group col-start-1 flex items-center gap-2.5 justify-self-start rounded-full outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+          className="group flex shrink-0 items-center gap-2.5 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-background"
         >
           <Image
             src={profile.logoWhite}
@@ -175,17 +181,15 @@ export function Navbar() {
               shrink ? "h-13" : "h-15 sm:h-16",
             )}
           />
-          <span className="hidden font-display text-[0.9375rem] font-semibold leading-none tracking-tight text-foreground sm:block">
+          <span className="hidden font-display text-lg font-semibold leading-none tracking-tight text-foreground sm:block">
             {profile.name}
           </span>
         </a>
 
-        {/* `col-start-2` is load-bearing: without it these auto-place into
-            column 1 and the links drift off centre. */}
         <nav
           aria-label="Main"
           // Tight gap: the links should read as one group, not five islands.
-          className="col-start-2 hidden items-center gap-0.5 justify-self-center md:flex"
+          className="hidden shrink-0 items-center gap-0.5 md:flex"
         >
           {navLinks.map((link) => {
             const isActive = active === link.href.slice(1);
@@ -195,7 +199,7 @@ export function Navbar() {
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
                 className={cn(
-                  "rounded-full px-3 py-1.5 text-[0.8125rem] font-medium tracking-tight transition-colors duration-200",
+                  "rounded-full px-3 py-2 text-[0.9375rem] font-medium tracking-tight transition-colors duration-200",
                   "outline-none focus-visible:ring-2 focus-visible:ring-accent",
                   // The label stays ivory when active; the gold-tinted fill
                   // carries the state. No sliding indicator — each link just
@@ -212,14 +216,14 @@ export function Navbar() {
         </nav>
 
         {/* CTA on desktop, menu toggle on mobile. */}
-        <div className="col-start-3 flex items-center gap-2 justify-self-end">
+        <div className="flex shrink-0 items-center gap-2">
           <ButtonLink
             href={contact.cta.href}
             size="sm"
             // Same gold pill, dialled down: at nav scale the variant's drop
             // glow reads as a blob and competes with the hero's CTA, so the
             // glow only appears on hover here.
-            className="hidden text-[0.8125rem] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4)] hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_8px_24px_-10px_rgba(238,203,62,0.6)] md:inline-flex"
+            className="hidden text-[0.875rem] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.4)] hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_8px_24px_-10px_rgba(238,203,62,0.6)] md:inline-flex"
           >
             {contact.cta.label}
           </ButtonLink>
@@ -287,7 +291,7 @@ export function Navbar() {
                     aria-current={isActive ? "true" : undefined}
                     onClick={() => setOpen(false)}
                     className={cn(
-                      "block rounded-xl px-4 py-3 text-sm transition-colors",
+                      "block rounded-xl px-4 py-3 text-[0.9375rem] transition-colors",
                       "outline-none focus-visible:ring-2 focus-visible:ring-accent",
                       isActive
                         ? "bg-accent/12 text-foreground ring-1 ring-accent/25"

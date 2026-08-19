@@ -19,18 +19,26 @@
   /* Apple system stack — SF Pro on macOS/iOS, graceful fallbacks elsewhere.
      `-apple-system`/`BlinkMacSystemFont` pick up the locally installed SF Pro;
      the OS swaps in the Display optical size automatically at large sizes. */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro",
-    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro",
-    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
-    monospace;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", system-ui,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", system-ui,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  /* Space Grotesk, loaded in `layout.tsx`. Small labels only — at 13px SF Pro
+     reads as UI chrome, and this has letterforms that survive the size. */
+  --font-label: var(--font-label-src), var(--font-sans);
 
   /* animations */
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--marquee-duration, 40s)
     linear infinite;
-  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  /* Aceternity's aurora: a slow sweep of layered repeating gradients. */
+  --animate-aurora: aurora 60s linear infinite;
+  /* The older drifting-blob effect, still used by the hero. */
+  --animate-aurora-blobs: aurora-blobs 18s ease-in-out infinite alternate;
   --animate-shimmer: shimmer 2.5s linear infinite;
   --animate-float: float 7s ease-in-out infinite;
   --animate-glow: glow 4s ease-in-out infinite;
@@ -52,6 +60,18 @@
     }
   }
   @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
+  @keyframes aurora-blobs {
     0% {
       transform: translate(-10%, -10%) rotate(0deg) scale(1);
     }
@@ -112,17 +132,18 @@ body {
 
 /* Subtle animated grain/vignette hooks */
 .bg-grid {
-  background-image: linear-gradient(
-      to right,
-      var(--color-border) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
     linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
 .bg-radial-fade {
-  mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, #000 40%, transparent);
+  mask-image: radial-gradient(
+    ellipse 60% 60% at 50% 40%,
+    #000 40%,
+    transparent
+  );
 }
 
 /* Gradient text helper */

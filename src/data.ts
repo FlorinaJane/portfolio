@@ -18,37 +18,16 @@ export const profile = {
   name: "Flo of Music",
   realName: "Florina Jane",
   role: "Mixing & Mastering Engineer · Music Educator",
-  // The hero states these two on their own lines: [0] is the headline, [1] the
-  // secondary credit beneath it. `role` above stays as the joined form used in
-  // the page <title> and social previews.
-  roles: ["Mixing & Mastering Engineer", "Music Educator"],
-  // Kept deliberately plain and keyword-bearing: this is the <meta
-  // description> and OG description in layout.tsx, where it is read by search
-  // engines rather than people. The hero uses `heroLine` instead.
+  roles: ["Mixing & Mastering Engineer", "Music Educator", "Podcast Host"],
   tagline:
     "Mixing & mastering engineer helping artists bring their songs to life — clarity, emotion, and balance, release ready.",
-  // The spoken-aloud version, for the hero. First person to match `about`.
-  // `heroIntro` is the greeting the flipping role completes ("…and I’m a" +
-  // "Music Educator"), and the role sits on its own line: the two roles differ
-  // by 13 characters, so inlining them mid-sentence would re-wrap the line and
-  // jog everything below on every flip.
   heroIntro: "Hey, I’m Florina Jane and I’m a",
   heroLine: "You know the feeling. I know the frequencies.",
   about:
-    "I’m Florina Jane, also known as Flo of Music, a mixing and mastering engineer and music educator passionate about helping artists bring their songs to life. I specialize in mixing and mastering, with a strong focus on clarity, emotion, and balance. I work across pop, indie, acoustic, contemporary genres, and more, adapting my approach to suit each artist’s sound. My creative approach blends technical precision with musical intuition, so every track feels true to the artist while being fully release ready.",
-  genres: ["Pop", "Indie", "Acoustic", "Contemporary", "& more"],
-  // Optional portrait — drop an image in /public and set the path here.
-  portrait: "/portrait.jpeg" as string,
-  // Circular navy+gold badge — used as the vinyl record's centre label in the
-  // hero. Replace with your exact artwork by saving it to /public and updating
-  // this path.
+    "I’m Florina Jane, also known as Flo of Music. I’m a mixing and mastering engineer and educator. Every project starts with the song itself, and my approach adapts to what it needs. I focus on clarity, balance, and depth, handling the technical work so that nothing stands between the listener and the performance. I also teach mixing and mastering to artists and engineers who want to develop the skill themselves. Every record leaves my desk ready for release and still sounding like the artist who made it.",
+  portrait: "/portrait.webp" as string,
   logo: "/logo.png",
-  // Monochrome white mark on a transparent background, used in the navbar.
-  // Unlike `logo` this is a full-bleed mark, not a circular badge, so it is
-  // rendered without a ring or rounded crop.
   logoWhite: "/logo-white.webp",
-  // Full-bleed hero backdrop. Wants a dark, low-contrast image: the hero text
-  // sits directly on it, softened only by a navy wash and centre vignette.
   heroBg: "/hero-bg.jpg",
 };
 
@@ -92,10 +71,10 @@ export const stats: {
   suffix: string;
   label: string;
 }[] = [
-  { value: 46, suffix: "k+", label: "Learners taught" },
+  { value: 50, suffix: "K+", label: "Learners taught" },
   { value: 5, suffix: "+", label: "Years of experience" },
-  { value: 1.8, suffix: "M", label: "Total viewership" },
-  { value: 100, suffix: "+", label: "Tracks mixed" },
+  { value: 2, suffix: "M", label: "Total viewership" },
+  { value: 1000, suffix: "+", label: "Tracks mixed" },
 ];
 
 /* ------------------------------ Services -------------------------------- */
@@ -220,7 +199,10 @@ export const courses = {
   heading: "Learn mixing & mastering with me",
   description:
     "Practical, artist-first courses that turn studio theory into release-ready results. Join 46k+ learners.",
-  cta: { label: "Browse courses on Gumroad", href: "https://floofmusic.gumroad.com/" },
+  cta: {
+    label: "Browse courses on Gumroad",
+    href: "https://floofmusic.gumroad.com/",
+  },
 };
 
 /* --------------------------- Testimonials ------------------------------- */

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import { type ReactNode } from "react";
 
 const variants: Variants = {
@@ -11,6 +11,11 @@ const variants: Variants = {
 /**
  * Scroll-triggered reveal. Wrap any block to fade + rise it into view.
  * `delay` staggers siblings; `as` lets you keep semantic tags.
+ *
+ * `initial` is skipped under `prefers-reduced-motion`, which also stops the
+ * hidden state being written into the server markup for those users. The
+ * `data-reveal` hook lets the no-JS fallback in `layout.tsx` unhide everything,
+ * since motion writes `opacity:0` inline and nothing would ever clear it.
  */
 export function Reveal({
   children,
@@ -21,13 +26,16 @@ export function Reveal({
   children: ReactNode;
   delay?: number;
   className?: string;
-  as?: "div" | "section" | "li" | "span";
+  as?: "div" | "section" | "li" | "span" | "dl";
 }) {
   const MotionTag = motion[as];
+  const reduceMotion = useReducedMotion();
+
   return (
     <MotionTag
+      data-reveal=""
       className={className}
-      initial="hidden"
+      initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       variants={variants}
