@@ -7,12 +7,12 @@ import { profile } from "@/data";
 
 export function About() {
   return (
-    <Section id="about" className="pt-2 pb-14 sm:pt-4 sm:pb-16">
+    <Section id="about" className="pt-2 pb-8 sm:pt-4 sm:pb-10">
       {/* Ambient pool behind the whole block, so the columns sit *in* the page
           rather than on top of a flat navy field. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[38rem] w-[min(70rem,120%)] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--color-accent-3)_18%,transparent),transparent_70%)] opacity-70 blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[38rem] w-[min(70rem,100%)] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--color-accent-3)_18%,transparent),transparent_70%)] opacity-70 blur-3xl"
       />
 
       <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
@@ -21,9 +21,7 @@ export function About() {
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
             About <span className="text-gradient">Me</span>
           </h2>
-          {/* The rule gives the copy a left edge to sit against — without it the
-              paragraph floats in the middle of the column. */}
-          <p className="max-w-[54ch] border-l border-accent/25 pl-5 text-base leading-relaxed text-foreground/75 sm:pl-6 sm:text-lg">
+          <p className="max-w-[54ch] text-base leading-relaxed text-foreground/75 sm:text-lg">
             {profile.about}
           </p>
         </Reveal>

@@ -137,7 +137,7 @@ export function FaderScrollbar() {
   return (
     <div
       className={cn(
-        "fixed right-3 top-1/2 z-40 hidden -translate-y-1/2 select-none md:block",
+        "fixed right-3 top-1/2 z-40 hidden -translate-y-1/2 select-none min-[1250px]:block",
         "transition-opacity duration-300",
         scrollable ? "opacity-100" : "pointer-events-none opacity-0",
       )}

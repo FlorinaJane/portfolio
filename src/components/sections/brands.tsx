@@ -10,28 +10,16 @@ import { brands, brandsHeading } from "@/data";
  */
 export function Brands() {
   return (
-    <section className="relative pb-20 pt-0 sm:pb-24">
-      {/* Only a closing rule at the bottom. A matching one at the top read as a
-          divider from the About block above, which is the join we want hidden —
-          the wall should feel like the tail of that block, not a new band. */}
+    <section className="relative pb-11 pt-6 sm:pb-16 sm:pt-8">
+      {/* A closing rule at the bottom only. Nothing at the top: the wall should
+          read as the tail of the About block, not as a separate band. */}
       <div
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/12 to-transparent"
       />
 
       <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-        {/* A short centred rule rather than a full-width one: enough to mark the
-            join with the About block, without drawing a line across the page.
-            The space below it is kept equal to About's bottom padding, so the
-            rule sits centred in the gap between the two sections. */}
-        <Reveal className="flex justify-center">
-          <span
-            aria-hidden
-            className="h-px w-48 bg-linear-to-r from-transparent via-accent/70 to-transparent sm:w-80"
-          />
-        </Reveal>
-
-        <Reveal delay={0.05} className="mt-14 text-center sm:mt-16">
+        <Reveal className="text-center">
           <p className="font-label text-sm font-medium uppercase tracking-[0.18em] text-muted sm:text-base">
             {brandsHeading}
           </p>

@@ -79,21 +79,71 @@ export const stats: {
 
 /* ------------------------------ Services -------------------------------- */
 
+/**
+ * `heading` is the plain-text mirror of the JSX title in `services.tsx`, which
+ * splits the line so the last word takes the gold gradient — same arrangement
+ * as `mixesHeading`, `courses` and `testimonials`.
+ */
+export const servicesHeading = {
+  heading: "What I Offer",
+  moreLabel: "Also available",
+  description:
+    "Every song asks for something different, so send me yours and I’ll tell " +
+    "you honestly what it needs. Sometimes that’s a full mix, sometimes it’s " +
+    "one fix. Revisions are included, most songs come back within a week, and " +
+    "nothing leaves my desk until it’s ready to release and still sounds " +
+    "unmistakably like you.",
+};
+
+/** A price the card can typeset, rather than a pre-formatted sentence. */
+/** One stop on a tiered service's slider. */
+export type ServiceTier = {
+  /** Full, unambiguous phrasing shown above the price. */
+  label: string;
+  /** Short form for the stop marker under the slider. */
+  tick: string;
+  amount: number;
+};
+
+export type ServicePrice =
+  | { amount: number; prefix?: string; unit?: string }
+  | { tiers: ServiceTier[] }
+  | { onRequest: string };
+
 export type Service = {
   icon: string; // emoji
   title: string;
   description: string;
-  price: string;
+  price: ServicePrice;
+  /** Bullet lines under the price. Detail that used to be crammed into the
+   *  price string lives here, where it is scannable. */
+  includes?: string[];
+  /** "song" services are per-track and priced simply, so they lead. "other"
+   *  services have bespoke scope and sit in a quieter row underneath. */
+  group: "song" | "other";
   featured?: boolean;
 };
 
 export const services: Service[] = [
   {
     icon: "🎚️",
-    title: "Mixing",
+    title: "Mixing & Mastering Bundle",
     description:
-      "Professional mixes that enhance clarity, depth, balance, and musical impact.",
-    price: "From INR 3,500",
+      "Mixing and mastering handled together, so the mix is built with the master in mind. Slide to match your track count.",
+    // Tiers, not one figure: the card renders a slider and the price follows it.
+    // The first tier is what server-rendered HTML shows before hydration.
+    price: {
+      tiers: [
+        { label: "Under 3 tracks", tick: "3", amount: 3500 },
+        { label: "Up to 10 tracks", tick: "10", amount: 7000 },
+        { label: "Up to 30 tracks", tick: "30", amount: 8000 },
+        { label: "Up to 50 tracks", tick: "50", amount: 11000 },
+        { label: "Up to 100 tracks", tick: "100", amount: 15000 },
+        { label: "More than 100 tracks", tick: "100+", amount: 17000 },
+      ],
+    },
+    includes: ["Mixing and mastering together", "Revisions included"],
+    group: "song",
     featured: true,
   },
   {
@@ -101,39 +151,65 @@ export const services: Service[] = [
     title: "Mastering",
     description:
       "Platform-ready masters optimised for loudness, clarity, and consistent playback across all devices.",
-    price: "INR 3,000 / song",
+    price: { amount: 3000, unit: "per song" },
+    includes: [
+      "Optimised for streaming loudness",
+      "Consistent on every device",
+    ],
+    group: "song",
   },
   {
     icon: "🎤",
     title: "Vocal Tuning",
     description:
       "Natural pitch correction that preserves the emotion, tone, and authenticity of every performance.",
-    price: "INR 2,500 / vocal track",
+    price: { amount: 2500, unit: "per vocal track" },
+    includes: ["Natural, transparent correction", "Keeps the original emotion"],
+    group: "song",
   },
   {
     icon: "🎓",
     title: "1:1 Mentorship",
     description:
       "Personalised one-on-one coaching in mixing, mastering, recording, and music production, tailored to your goals.",
-    price: "INR 8,000 · 4 classes (1 hr each)",
+    price: { amount: 8000, unit: "for 4 classes" },
+    includes: ["Four sessions, one hour each"],
+    group: "other",
   },
   {
     icon: "🤝",
     title: "Brand Collaborations",
     description:
       "Educational, engaging content showcasing music software and creative tools through sponsored videos and partnerships.",
-    price: "INR 15,000 long-form · INR 8,000 short-form",
+    price: { amount: 8000, prefix: "From", unit: "per video" },
+    includes: ["Short-form video: ₹8,000", "Long-form video: ₹15,000"],
+    group: "other",
   },
   {
     icon: "🎙️",
     title: "Podcast Features",
     description:
       "Thought-provoking conversations with artists and industry professionals on music, creativity, and process.",
-    price: "Contact for collaborations",
+    price: { onRequest: "On request" },
+    group: "other",
   },
 ];
 
+/** Indian digit grouping, so 15000 reads as 15,000 not 15.000. */
+export const formatINR = (amount: number) =>
+  new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(amount);
+
 /* -------------------------------- Mixes --------------------------------- */
+
+/**
+ * `heading` is the plain-text mirror of the JSX title in `mixes.tsx`, which
+ * splits the line so the last words take the gold gradient — same arrangement
+ * as `courses` and `testimonials`.
+ */
+export const mixesHeading = {
+  heading: "Mixes I’m Proud Of",
+  description: "Songs I’ve mixed and mastered. Headphones recommended.",
+};
 
 export type Mix = {
   title: string;
@@ -162,7 +238,7 @@ export const mixes: Mix[] = [
     youtubeUrl: "https://youtu.be/tNZJqobMEHI",
   },
   {
-    title: "Manitho — Intercession to The Theotokos",
+    title: "Manitho - Intercession to The Theotokos",
     artist: "Basil Jacob ft. The Glorious Voice",
     youtubeUrl: "https://youtu.be/pr8sYnkGXF4",
   },
@@ -193,6 +269,32 @@ export const youtubeThumb = (url: string) =>
 export const youtubeWatch = (url: string) =>
   `https://www.youtube.com/watch?v=${youtubeId(url)}`;
 
+/**
+ * 1280×720, but YouTube only generates it for some uploads — one of the mixes
+ * below 404s on it. Callers must fall back to `youtubeThumbSd`.
+ */
+export const youtubeThumbMax = (url: string) =>
+  `https://i.ytimg.com/vi/${youtubeId(url)}/maxresdefault.jpg`;
+
+/**
+ * 640×480 and always present. It is the 16:9 frame letterboxed into 4:3, so
+ * under `object-cover` in a 16:9 box the bars crop away exactly.
+ */
+export const youtubeThumbSd = (url: string) =>
+  `https://i.ytimg.com/vi/${youtubeId(url)}/sddefault.jpg`;
+
+/** 320×180 — true 16:9, always present. For the small tracklist rows. */
+export const youtubeThumbSmall = (url: string) =>
+  `https://i.ytimg.com/vi/${youtubeId(url)}/mqdefault.jpg`;
+
+/**
+ * Privacy-preserving embed host, so nothing is set until a visitor actually
+ * presses play — the player is not mounted before that either.
+ */
+export const youtubeEmbed = (url: string) =>
+  `https://www.youtube-nocookie.com/embed/${youtubeId(url)}` +
+  `?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+
 /* ------------------------------ Courses --------------------------------- */
 
 export const courses = {
@@ -219,7 +321,7 @@ export const testimonials = {
 
 /* --------------------------- Brands / clients --------------------------- */
 
-export const brandsHeading = "Brands & studios I’ve worked with";
+export const brandsHeading = "Trusted by";
 
 /**
  * `logo` files live in `public/brands/`, pulled from each company's own site
@@ -326,6 +428,12 @@ export const contact = {
     href: "mailto:flojane.music@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Flo%20of%20Music",
   },
 };
+
+/** Pre-fills the subject line so an enquiry arrives already labelled. */
+export const serviceInquiryHref = (service: string) =>
+  `mailto:${contact.email}?subject=${encodeURIComponent(
+    `${service} enquiry (Flo of Music)`,
+  )}`;
 
 /* ------------------------------- Nav ------------------------------------ */
 

@@ -7,7 +7,7 @@ import { contact, resources, socials, profile } from "@/data";
 
 export function Contact() {
   return (
-    <Section id="contact" className="pb-8">
+    <Section id="contact" className="py-11 sm:py-16">
       {/* Resource cards */}
       <div className="mb-14 grid gap-4 sm:grid-cols-2">
         {resources.map((r, i) => (

@@ -8,6 +8,7 @@ import { Courses } from "@/components/sections/courses";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Contact } from "@/components/sections/contact";
 import { FaderScrollbar } from "@/components/ui/fader-scrollbar";
+import { SectionDivider } from "@/components/ui/section-divider";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <About />
         <Brands />
         <Mixes />
+        <SectionDivider />
         <Services />
         <Courses />
         <Testimonials />

@@ -6,7 +6,7 @@ import { testimonials } from "@/data";
 
 export function Testimonials() {
   return (
-    <Section id="testimonials">
+    <Section id="testimonials" className="py-11 sm:py-16">
       <div className="grid items-center gap-10 lg:grid-cols-2">
         <SectionHeading
           title={

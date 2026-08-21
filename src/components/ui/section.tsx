@@ -30,16 +30,20 @@ export function SectionHeading({
   title,
   subtitle,
   align = "left",
+  className,
 }: {
   title: ReactNode;
   subtitle?: ReactNode;
   align?: "left" | "center";
+  /** Appended last, so `max-w-none` here overrides the default `max-w-2xl`. */
+  className?: string;
 }) {
   return (
     <Reveal
       className={cn(
         "flex max-w-2xl flex-col gap-4",
         align === "center" && "mx-auto items-center text-center",
+        className,
       )}
     >
       <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl">

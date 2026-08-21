@@ -6,7 +6,7 @@ import { courses } from "@/data";
 
 export function Courses() {
   return (
-    <Section id="courses">
+    <Section id="courses" className="py-11 sm:py-16">
       <Reveal>
         <div className="relative overflow-hidden rounded-3xl border border-border p-8 sm:p-14">
           {/* glow bg */}
