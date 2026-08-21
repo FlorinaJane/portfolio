@@ -18,7 +18,7 @@ export function Testimonials() {
         />
 
         <Reveal delay={0.1}>
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-surface/60 p-8">
+          <div className="relative overflow-hidden card-fill rounded-3xl border border-border p-8">
             <Quote className="size-10 text-accent/40" />
             <p className="mt-4 font-display text-xl leading-snug text-foreground/90 sm:text-2xl">
               Every collaboration is built on trust, clarity, and care for the

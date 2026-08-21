@@ -42,7 +42,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-background/45" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_65%_55%_at_center,var(--color-background)_0%,transparent_75%)] opacity-20" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,var(--color-background)_100%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-b from-transparent to-background" />
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-b from-transparent via-background/70 to-background" />
       </div>
 
       <motion.div

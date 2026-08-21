@@ -8,7 +8,7 @@ export function Courses() {
   return (
     <Section id="courses" className="py-11 sm:py-16">
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border border-border p-8 sm:p-14">
+        <div className="card-fill relative overflow-hidden rounded-3xl border border-border p-8 sm:p-14">
           {/* glow bg */}
           <div
             aria-hidden
@@ -16,7 +16,6 @@ export function Courses() {
           >
             <div className="absolute -left-10 top-0 h-72 w-72 rounded-full bg-[radial-gradient(circle,var(--color-accent),transparent_60%)] opacity-25 blur-3xl" />
             <div className="absolute -right-10 bottom-0 h-72 w-72 rounded-full bg-[radial-gradient(circle,var(--color-accent-3),transparent_60%)] opacity-20 blur-3xl" />
-            <div className="absolute inset-0 bg-grid opacity-30" />
           </div>
 
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">

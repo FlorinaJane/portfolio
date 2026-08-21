@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/data";
 import { ScrollTopOnLoad } from "@/components/ui/scroll-top-on-load";
+import { PageAmbience } from "@/components/ui/page-ambience";
 
 // Headings and body come from the OS system stack (see globals.css) — Apple
 // devices render SF Pro, others fall back to Segoe UI / Roboto. The one webfont
@@ -48,8 +49,9 @@ export default function RootLayout({
           <style>{`[data-reveal]{opacity:1!important;filter:none!important;transform:none!important}`}</style>
         </noscript>
       </head>
-      <body className="min-h-full">
+      <body className="relative min-h-full">
         <ScrollTopOnLoad />
+        <PageAmbience />
         {children}
       </body>
     </html>

@@ -29,7 +29,7 @@ export function StatsStrip() {
 
                 `transition` lists `translate`, not `transform` — Tailwind v4's
                 translate utilities set the standalone `translate` property. */}
-            <div className="group relative grid h-full cursor-default overflow-hidden rounded-2xl border border-white/8 bg-linear-to-b from-surface/75 via-surface/45 to-surface/25 shadow-[0_14px_34px_-16px_rgba(0,0,0,0.85),inset_0_1px_0_0_rgba(255,255,255,0.08)] transition-[border-color,translate,box-shadow] duration-300 ease-out hover:border-white/20 hover:shadow-[0_20px_44px_-16px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.14)] motion-safe:hover:-translate-y-1">
+            <div className="group relative grid h-full cursor-default overflow-hidden rounded-2xl border border-white/8 card-fill shadow-[0_14px_34px_-16px_rgba(0,0,0,0.85),inset_0_1px_0_0_rgba(255,255,255,0.08)] transition-[border-color,translate,box-shadow] duration-300 ease-out hover:border-white/20 hover:shadow-[0_20px_44px_-16px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.14)] motion-safe:hover:-translate-y-1">
               {/* Soft glow under the figure, echoing the hero's radial pools. */}
               <span
                 aria-hidden

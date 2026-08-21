@@ -20,12 +20,12 @@ export function surfaceCardClass(featured = false) {
     "motion-safe:hover:-translate-y-1",
     featured
       ? [
-          "border-accent/35 bg-linear-to-b from-accent/[0.10] via-accent/[0.04] to-surface/25",
+          "card-fill-featured border-accent/35",
           "shadow-[0_18px_44px_-18px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.12)]",
           "hover:border-accent/55 hover:shadow-[0_26px_56px_-18px_rgba(0,0,0,0.95),inset_0_1px_0_0_rgba(255,255,255,0.18)]",
         ]
       : [
-          "border-white/8 bg-linear-to-b from-surface/75 via-surface/45 to-surface/25",
+          "card-fill border-white/8",
           "shadow-[0_14px_34px_-16px_rgba(0,0,0,0.85),inset_0_1px_0_0_rgba(255,255,255,0.08)]",
           "hover:border-white/20 hover:shadow-[0_22px_48px_-16px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.14)]",
         ],

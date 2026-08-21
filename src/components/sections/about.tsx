@@ -8,13 +8,6 @@ import { profile } from "@/data";
 export function About() {
   return (
     <Section id="about" className="pt-2 pb-8 sm:pt-4 sm:pb-10">
-      {/* Ambient pool behind the whole block, so the columns sit *in* the page
-          rather than on top of a flat navy field. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[38rem] w-[min(70rem,100%)] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,color-mix(in_oklab,var(--color-accent-3)_18%,transparent),transparent_70%)] opacity-70 blur-3xl"
-      />
-
       <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
         {/* Text */}
         <Reveal className="flex flex-col gap-6">
@@ -38,7 +31,7 @@ export function About() {
             />
 
             <div className="relative aspect-square w-full overflow-hidden rounded-3xl bg-surface">
-              <AuroraBackground variant="aurora" grid={false} fade={false} />
+              <AuroraBackground variant="aurora" fade={false} />
               {profile.portrait ? (
                 <Image
                   src={profile.portrait}

@@ -46,7 +46,7 @@ export function Mixes() {
       <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-[1.55fr_1fr] lg:gap-8">
         {/* Stage */}
         <Reveal className="min-w-0">
-          <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/8 bg-surface/50 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
+          <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/8 bg-background shadow-[0_24px_60px_-24px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.08)]">
             {playing ? (
               // Remounting on track change is what re-triggers autoplay.
               <iframe

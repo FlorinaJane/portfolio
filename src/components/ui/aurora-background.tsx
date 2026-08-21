@@ -17,13 +17,10 @@ import { cn } from "@/lib/utils";
 export function AuroraBackground({
   className,
   variant = "blobs",
-  grid = true,
   fade = true,
 }: {
   className?: string;
   variant?: "aurora" | "blobs";
-  /** The faint ruled grid over the effect. */
-  grid?: boolean;
   /** Bottom fade into the page background — only meaningful full-bleed. */
   fade?: boolean;
 }) {
@@ -72,11 +69,6 @@ export function AuroraBackground({
             "[mask-image:radial-gradient(ellipse_at_50%_20%,black_15%,transparent_85%)]",
           )}
         />
-      )}
-
-      {/* grid + fade */}
-      {grid && (
-        <div className="bg-grid bg-radial-fade absolute inset-0 opacity-40" />
       )}
 
       {/* bottom fade into page bg */}

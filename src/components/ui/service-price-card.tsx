@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { CardDecor, surfaceCardClass } from "@/components/ui/surface-card";
+import { ServiceIcon } from "@/components/ui/service-icon";
 import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { formatINR, serviceInquiryHref, type Service } from "@/data";
@@ -39,8 +40,8 @@ export function ServicePriceCard({ service }: { service: Service }) {
       <CardDecor featured={service.featured} />
       <div className="relative flex h-full flex-col p-6 sm:p-7">
         <div className="flex items-center justify-between gap-3">
-          <span className="grid size-12 shrink-0 place-items-center rounded-xl border border-border bg-background/60 text-2xl">
-            {service.icon}
+          <span className="grid size-12 shrink-0 place-items-center rounded-xl border border-border bg-background/60">
+            <ServiceIcon name={service.icon} className="size-6 text-accent" />
           </span>
           {service.featured && (
             <span className="font-label rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-accent">

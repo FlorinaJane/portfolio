@@ -168,6 +168,29 @@ body {
   background-repeat: repeat;
 }
 
+/* Opaque card fill. Same tonal range the translucent version had over the page
+   navy, but solid: with `PageAmbience` sitting behind the content, a
+   part-transparent panel let the glow show through and the card looked washed.
+   `background-color` is set as well so nothing can bleed through the gradient. */
+.card-fill {
+  background-color: var(--color-background);
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--color-surface) 72%, var(--color-background)),
+    color-mix(in oklab, var(--color-surface) 42%, var(--color-background)) 55%,
+    color-mix(in oklab, var(--color-surface) 22%, var(--color-background))
+  );
+}
+.card-fill-featured {
+  background-color: var(--color-background);
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--color-accent) 9%, var(--color-background)),
+    color-mix(in oklab, var(--color-accent) 4%, var(--color-background)) 55%,
+    color-mix(in oklab, var(--color-surface) 22%, var(--color-background))
+  );
+}
+
 /* Glass surface */
 .glass {
   background: color-mix(in oklab, var(--color-surface) 70%, transparent);

@@ -2,6 +2,7 @@ import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { ServicePriceCard } from "@/components/ui/service-price-card";
 import { CardDecor, surfaceCardClass } from "@/components/ui/surface-card";
+import { ServiceIcon } from "@/components/ui/service-icon";
 import { ButtonLink } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -71,7 +72,10 @@ export function Services() {
               <CardDecor />
               <div className="relative flex h-full flex-col p-5">
                 <div className="flex items-center gap-3">
-                  <span className="text-xl">{service.icon}</span>
+                  <ServiceIcon
+                    name={service.icon}
+                    className="size-5 shrink-0 text-accent"
+                  />
                   <h3 className="font-display text-lg font-semibold">
                     {service.title}
                   </h3>

@@ -110,8 +110,16 @@ export type ServicePrice =
   | { tiers: ServiceTier[] }
   | { onRequest: string };
 
+/**
+ * Picks the glyph in `components/ui/service-icon.tsx`. A key rather than an
+ * emoji: emoji render as a different typeface on every OS and cannot inherit
+ * the accent colour. Same arrangement as `SocialKey`.
+ */
+export type ServiceIcon =
+  "mixing" | "mastering" | "vocals" | "mentorship" | "collab" | "podcast";
+
 export type Service = {
-  icon: string; // emoji
+  icon: ServiceIcon;
   title: string;
   description: string;
   price: ServicePrice;
@@ -126,7 +134,7 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    icon: "🎚️",
+    icon: "mixing",
     title: "Mixing & Mastering Bundle",
     description:
       "Mixing and mastering handled together, so the mix is built with the master in mind. Slide to match your track count.",
@@ -147,7 +155,7 @@ export const services: Service[] = [
     featured: true,
   },
   {
-    icon: "🎧",
+    icon: "mastering",
     title: "Mastering",
     description:
       "Platform-ready masters optimised for loudness, clarity, and consistent playback across all devices.",
@@ -159,7 +167,7 @@ export const services: Service[] = [
     group: "song",
   },
   {
-    icon: "🎤",
+    icon: "vocals",
     title: "Vocal Tuning",
     description:
       "Natural pitch correction that preserves the emotion, tone, and authenticity of every performance.",
@@ -168,7 +176,7 @@ export const services: Service[] = [
     group: "song",
   },
   {
-    icon: "🎓",
+    icon: "mentorship",
     title: "1:1 Mentorship",
     description:
       "Personalised one-on-one coaching in mixing, mastering, recording, and music production, tailored to your goals.",
@@ -177,7 +185,7 @@ export const services: Service[] = [
     group: "other",
   },
   {
-    icon: "🤝",
+    icon: "collab",
     title: "Brand Collaborations",
     description:
       "Educational, engaging content showcasing music software and creative tools through sponsored videos and partnerships.",
@@ -186,7 +194,7 @@ export const services: Service[] = [
     group: "other",
   },
   {
-    icon: "🎙️",
+    icon: "podcast",
     title: "Podcast Features",
     description:
       "Thought-provoking conversations with artists and industry professionals on music, creativity, and process.",
