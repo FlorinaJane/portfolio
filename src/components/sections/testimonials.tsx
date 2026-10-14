@@ -26,8 +26,10 @@ export function Testimonials() {
           </Reveal>
         </div>
 
-        {/* The stack peeks above its own top edge, so it needs a little room. */}
-        <Reveal delay={0.1} className="pt-6">
+        {/* The back cards peek 4 × 14px above the stack's top edge. Stacked
+            on mobile, the padding has to cover all of that, or the peek eats
+            the gap under the button. Side by side, a little room is enough. */}
+        <Reveal delay={0.1} className="pt-14 lg:pt-6">
           <CardStack items={testimonials.items} />
         </Reveal>
       </div>
