@@ -6,14 +6,15 @@ import { courses } from "@/data";
 
 export function Courses() {
   return (
-    <Section id="courses" className="py-11 sm:py-16">
+    <Section id="courses" className="py-4 sm:py-6">
       <Reveal>
-        <div className="card-fill relative overflow-hidden rounded-3xl border border-border p-8 sm:p-14">
+        <div className="relative overflow-hidden rounded-3xl border border-border p-8 sm:p-14">
           {/* glow bg */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 -z-10"
           >
+            <div className="bg-grid absolute inset-0 opacity-30" />
             <div className="absolute -left-10 top-0 h-72 w-72 rounded-full bg-[radial-gradient(circle,var(--color-accent),transparent_60%)] opacity-25 blur-3xl" />
             <div className="absolute -right-10 bottom-0 h-72 w-72 rounded-full bg-[radial-gradient(circle,var(--color-accent-3),transparent_60%)] opacity-20 blur-3xl" />
           </div>

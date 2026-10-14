@@ -24,7 +24,7 @@ export const profile = {
   heroIntro: "Hey, I’m Florina Jane and I’m a",
   heroLine: "You know the feeling. I know the frequencies.",
   about:
-    "I’m Florina Jane, also known as Flo of Music. I’m a mixing and mastering engineer and educator. Every project starts with the song itself, and my approach adapts to what it needs. I focus on clarity, balance, and depth, handling the technical work so that nothing stands between the listener and the performance. I also teach mixing and mastering to artists and engineers who want to develop the skill themselves. Every record leaves my desk ready for release and still sounding like the artist who made it.",
+    "I’m Florina Jane, also known as Flo of Music. I’m a mixing and mastering engineer and educator. I focus on clarity, balance, and depth, handling the technical work so that nothing stands between the listener and the performance. I also teach mixing and mastering to artists and engineers who want to develop the skill themselves. A record is finished when three people are happy: me, the artist, and the listener.",
   portrait: "/portrait.webp" as string,
   logo: "/logo.png",
   logoWhite: "/logo-white.webp",
@@ -88,11 +88,7 @@ export const servicesHeading = {
   heading: "What I Offer",
   moreLabel: "Also available",
   description:
-    "Every song asks for something different, so send me yours and I’ll tell " +
-    "you honestly what it needs. Sometimes that’s a full mix, sometimes it’s " +
-    "one fix. Revisions are included, most songs come back within a week, and " +
-    "nothing leaves my desk until it’s ready to release and still sounds " +
-    "unmistakably like you.",
+    "From a full mix to a single fix, here’s how I can help your song.",
 };
 
 /** A price the card can typeset, rather than a pre-formatted sentence. */
@@ -171,17 +167,16 @@ export const services: Service[] = [
     title: "Vocal Tuning",
     description:
       "Natural pitch correction that preserves the emotion, tone, and authenticity of every performance.",
-    price: { amount: 2500, unit: "per vocal track" },
+    price: { amount: 1500, unit: "per vocal track" },
     includes: ["Natural, transparent correction", "Keeps the original emotion"],
     group: "song",
   },
   {
     icon: "mentorship",
-    title: "1:1 Mentorship",
+    title: "Private Lessons",
     description:
-      "Personalised one-on-one coaching in mixing, mastering, recording, and music production, tailored to your goals.",
+      "Personalised online one-on-one coaching in mixing, mastering, recording, and music production, tailored to your goals.",
     price: { amount: 8000, unit: "for 4 classes" },
-    includes: ["Four sessions, one hour each"],
     group: "other",
   },
   {
@@ -189,8 +184,7 @@ export const services: Service[] = [
     title: "Brand Collaborations",
     description:
       "Educational, engaging content showcasing music software and creative tools through sponsored videos and partnerships.",
-    price: { amount: 8000, prefix: "From", unit: "per video" },
-    includes: ["Short-form video: ₹8,000", "Long-form video: ₹15,000"],
+    price: { amount: 8000, prefix: "From" },
     group: "other",
   },
   {
@@ -198,7 +192,7 @@ export const services: Service[] = [
     title: "Podcast Features",
     description:
       "Thought-provoking conversations with artists and industry professionals on music, creativity, and process.",
-    price: { onRequest: "On request" },
+    price: { onRequest: "On Request" },
     group: "other",
   },
 ];
@@ -254,6 +248,11 @@ export const mixes: Mix[] = [
     title: "Devil Lies",
     youtubeUrl: "https://youtu.be/DgWByBtiHlo",
   },
+  {
+    title: "Alai",
+    artist: "Shanleo Studio",
+    youtubeUrl: "https://youtu.be/CaMrt6I3xAM",
+  },
 ];
 
 /** Extract a YouTube video id from any common URL shape. */
@@ -308,7 +307,7 @@ export const youtubeEmbed = (url: string) =>
 export const courses = {
   heading: "Learn mixing & mastering with me",
   description:
-    "Practical, artist-first courses that turn studio theory into release-ready results. Join 46k+ learners.",
+    "Practical courses that turn studio theory into release-ready results. Join 50k+ learners.",
   cta: {
     label: "Browse courses on Gumroad",
     href: "https://floofmusic.gumroad.com/",
@@ -317,14 +316,80 @@ export const courses = {
 
 /* --------------------------- Testimonials ------------------------------- */
 
+/** One card in the stack. `id` keys the reorder animation, so it must be
+ *  stable and unique rather than the array index. */
+export type Testimonial = {
+  id: string;
+  quote: string;
+  /** Artist or client, credited the way they want to be. */
+  name: string;
+  /** Release, project, or role the quote came out of. */
+  role: string;
+};
+
 export const testimonials = {
   heading: "What artists say",
   description:
     "Real words from the artists I’ve worked with — collected over on Instagram.",
   cta: {
     label: "See Instagram highlights",
-    href: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTk2OTg3MjgyMjc4NTAw?story_media_id=3932880219023719874&igsh=ZXA5aDJ6OGdmcWlr",
+    href: "https://www.instagram.com/s/aGlnaGxpZ2h0OjE3OTk2OTg3MjgyMjc4NTAw?story_media_id=3185626903160178866&stkn=ZXA5aDJ6OGdmcWlr",
   },
+  /**
+   * Trimmed from the messages and comments collected in the Instagram
+   * highlight and on YouTube. Only the testimonial itself is kept, with
+   * spelling and stretched-out letters tidied; the wording is otherwise
+   * theirs. Anyone who did not give a name is credited by what they came for.
+   */
+  items: [
+    {
+      id: "first-master",
+      quote:
+        "It’s my very first time getting a song mixed and mastered, and I " +
+        "couldn’t be happier with the results. You brought out the best in my " +
+        "vocals and lifted the whole sound. Your attention to detail made the " +
+        "process smooth.",
+      name: "Independent artist",
+      role: "First single, mix and master",
+    },
+    {
+      id: "youtube-saikiran",
+      quote:
+        "Every topic is explained in a way that is clear, practical, and easy " +
+        "to understand. From plugin usage to mixing and mastering, it is all " +
+        "presented with real knowledge. Valuable for beginners and experienced " +
+        "producers alike.",
+      name: "Chilumoju Saikiran",
+      role: "Music director, JSK Musical Studio",
+    },
+    {
+      id: "revisions",
+      quote:
+        "You help an artist get the sound they want. You never hesitate to " +
+        "revise until the artist is a hundred percent satisfied. I like that. " +
+        "You are an original gem.",
+      name: "Independent artist",
+      role: "Mix project",
+    },
+    {
+      id: "bass",
+      quote:
+        "The final version sounds great and the bass is exactly the way I " +
+        "wanted. You have been great with communication and timelines. Very " +
+        "professional.",
+      name: "Independent artist",
+      role: "Mix and master",
+    },
+    {
+      id: "workshop",
+      quote:
+        "I somehow made it to your session and it was very informative. Your " +
+        "knowledge of the topics and the way you articulated everything so " +
+        "simply is commendable. Keep up the great work.",
+      name: "Workshop attendee",
+      role: "Mixing workshop",
+    },
+  ] satisfies Testimonial[],
 };
 
 /* --------------------------- Brands / clients --------------------------- */
@@ -352,32 +417,18 @@ export type Brand = {
 
 export const brands: Brand[] = [
   {
-    name: "Audimee",
-    href: "https://audimee.com/",
-    logo: "/brands/audimee.webp",
-    width: 606,
+    name: "Kali Audio",
+    href: "https://www.kaliaudio.com/",
+    logo: "/brands/kali-audio.webp",
+    width: 139,
     height: 160,
+    scale: 1.25,
   },
   {
-    name: "Freebeat AI",
-    href: "https://freebeat.ai/",
-    logo: "/brands/freebeat-ai.webp",
-    width: 1083,
-    height: 160,
-    scale: 0.9,
-  },
-  {
-    name: "TopMediai",
-    href: "https://www.topmediai.com/",
-    logo: "/brands/topmediai.webp",
-    width: 785,
-    height: 160,
-  },
-  {
-    name: "AAFT Online",
-    href: "https://aaftonline.com/",
-    logo: "/brands/aaft-online.webp",
-    width: 354,
+    name: "The Inventory",
+    href: "https://theinventory.in/",
+    logo: "/brands/the-inventory.webp",
+    width: 536,
     height: 160,
     scale: 1.1,
   },
@@ -390,6 +441,36 @@ export const brands: Brand[] = [
     scale: 1.05,
   },
   {
+    name: "AAFT Online",
+    href: "https://aaftonline.com/",
+    logo: "/brands/aaft-online.webp",
+    width: 354,
+    height: 160,
+    scale: 1.1,
+  },
+  {
+    name: "Audimee",
+    href: "https://audimee.com/?ref=florinajane",
+    logo: "/brands/audimee.webp",
+    width: 606,
+    height: 160,
+  },
+  {
+    name: "Freebeat AI",
+    href: "https://freebeat.ai/#via=floofmusic",
+    logo: "/brands/freebeat-ai.webp",
+    width: 1083,
+    height: 160,
+    scale: 0.9,
+  },
+  {
+    name: "TopMediai",
+    href: "https://www.topmediai.com/app/ai-music/?custom=imf_17509226421419",
+    logo: "/brands/topmediai.webp",
+    width: 785,
+    height: 160,
+  },
+  {
     name: "Takstar",
     href: "https://takstar.com/",
     logo: "/brands/takstar.webp",
@@ -397,31 +478,38 @@ export const brands: Brand[] = [
     height: 160,
     scale: 1.2,
   },
+  {
+    name: "MusicCreator AI",
+    href: "https://www.musiccreator.ai/?ref=FLOOFMUSIC",
+    logo: "/brands/musiccreator-ai.webp",
+    width: 1109,
+    height: 160,
+    scale: 0.9,
+  },
 ];
 
 /* --------------------------- Resources / links -------------------------- */
 
 export type Resource = {
-  emoji: string;
   title: string;
   description: string;
-  href: string;
+  cta: { label: string; href: string };
 };
 
 export const resources: Resource[] = [
   {
-    emoji: "🎁",
-    title: "Discounts for you",
-    description: "Exclusive deals on the gear and tools I use and recommend.",
-    href: "https://floofmusic.my.canva.site/website/discounts",
-  },
-  {
-    emoji: "🛒",
-    title: "Products I own",
-    description: "My personal studio picks on Amazon (affiliate).",
-    href: "https://amzn.in/d/066DkqNi",
+    title: "Products I Own",
+    description: "My personal studio picks on Amazon.",
+    cta: { label: "See my picks on Amazon", href: "https://amzn.in/d/0ceYT2M8" },
   },
 ];
+
+/** Fine print in the footer, covering the Amazon picks and the referral links
+ *  in the brand wall. */
+export const affiliateDisclaimer =
+  "A few links on this site are affiliate links, which means I may earn a " +
+  "small commission if you purchase through them, at no extra cost to you. " +
+  "Thanks for supporting the channel! ❤️";
 
 /* ------------------------------ Contact --------------------------------- */
 

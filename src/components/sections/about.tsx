@@ -31,7 +31,7 @@ export function About() {
             />
 
             <div className="relative aspect-square w-full overflow-hidden rounded-3xl bg-surface">
-              <AuroraBackground variant="aurora" fade={false} />
+              <AuroraBackground variant="aurora" grid={false} fade={false} />
               {profile.portrait ? (
                 <Image
                   src={profile.portrait}
